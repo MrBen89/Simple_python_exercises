@@ -13,4 +13,14 @@ def encrypt(input, shift):
         message += letters[ind+ shift]
     print(f"The encoded message is: {message}.")
 
-encrypt(text, shift)
+def decrypt(input, shift):
+    message = ""
+    for letter in text:
+        ind = letters.index(letter)
+        message += letters[ind- shift]
+    print(f"The encoded message is: {message}.")
+
+if direction == "encode":
+    encrypt(text, shift)
+elif direction == "decode":
+    decrypt(text, shift)

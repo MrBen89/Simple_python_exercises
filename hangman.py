@@ -11,14 +11,17 @@ display = []
 for letter in chosen_word:
     display.append("_")
 
-guess = input("Please guess a letter. ").lower()
+while "_" in display:
+    guess = input("Please guess a letter. ").lower()
 
-count = 0;
-for letter in chosen_word:
-    if guess == letter:
-        display[count] = letter
-        count += 1
-    else:
-        count += 1
+    count = 0;
+    for letter in chosen_word:
+        if guess == letter:
+            display[count] = letter
+            count += 1
+        else:
+            count += 1
 
-print(display)
+    print(display)
+
+print("You win!")

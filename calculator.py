@@ -1,3 +1,7 @@
+import calculator_art
+
+logo = calculator_art.logo
+
 def add(n1, n2):
     return n1 + n2
 
@@ -19,13 +23,15 @@ operations = {
 answer = 0
 will_continue = "y"
 
+print(logo)
+
 while will_continue == "y":
     if answer == 0:
-        num1 = int(input("Whats the first number?"))
+        num1 = float(input("Whats the first number?"))
     else:
         num1 = answer
     operation = input("Which operator do you want to use? ( +, -, /, *) ")
-    num2 = int(input("Whats the second number?"))
+    num2 = float(input("Whats the second number?"))
 
 
     #Pull the function with the corresponding operator from the dictionary

@@ -55,6 +55,7 @@ def dashed_line(length):
 
 def random_walk(length):
     screen.colormode(255)
+    timmy_the_turtle.speed(0)
     timmy_the_turtle.pensize(5)
     for step in range(length):
         choice = random.randint(0,4)
@@ -67,7 +68,17 @@ def random_walk(length):
         timmy_the_turtle.forward(25)
         timmy_the_turtle.pencolor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
-random_walk(20)
+#random_walk(100)
+
+def draw_circles(number):
+    screen.colormode(255)
+    timmy_the_turtle.speed(0)
+    for i in range(number):
+        timmy_the_turtle.circle(100)
+        timmy_the_turtle.left(360/number)
+        timmy_the_turtle.pencolor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
+draw_circles(50)
 
 #for x in range(3, 20):
     #draw_regular_shapes(100, x)

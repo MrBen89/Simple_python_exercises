@@ -1,8 +1,11 @@
 from turtle import Turtle, Screen
+import random
 
 timmy_the_turtle = Turtle()
 timmy_the_turtle.shape("turtle")
 timmy_the_turtle.color("red", "green")
+
+screen = Screen()
 
 def draw_square(size):
     for i in range(4):
@@ -20,6 +23,7 @@ def draw_hexagon(size):
     for i in range(6):
         timmy_the_turtle.forward(size)
         timmy_the_turtle.left(60)
+
 
 
 def draw_regular_shapes(size, sides):
@@ -49,10 +53,24 @@ def dashed_line(length):
         timmy_the_turtle.forward(length-drawn)
         timmy_the_turtle.pendown()
 
+def random_walk(length):
+    screen.colormode(255)
+    timmy_the_turtle.pensize(5)
+    for step in range(length):
+        choice = random.randint(0,4)
+        if choice == 1:
+            timmy_the_turtle.left(90)
+        if choice == 2:
+            timmy_the_turtle.left(180)
+        if choice == 3:
+            timmy_the_turtle.left(270)
+        timmy_the_turtle.forward(25)
+        timmy_the_turtle.pencolor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
+random_walk(20)
+
+#for x in range(3, 20):
+    #draw_regular_shapes(100, x)
 
 
-for x in range(3, 20):
-    draw_regular_shapes(100, x)
-
-screen = Screen()
 screen.exitonclick()

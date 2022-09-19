@@ -21,6 +21,12 @@ def draw_hexagon(size):
         timmy_the_turtle.forward(size)
         timmy_the_turtle.left(60)
 
+
+def draw_regular_shapes(size, sides):
+    for i in range(sides):
+        timmy_the_turtle.forward(size)
+        timmy_the_turtle.left(360/sides)
+
 def dashed_line(length):
     pendown = True
     drawn = 0
@@ -41,9 +47,12 @@ def dashed_line(length):
     else:
         timmy_the_turtle.penup()
         timmy_the_turtle.forward(length-drawn)
+        timmy_the_turtle.pendown()
 
 
-dashed_line(55)
+
+for x in range(3, 20):
+    draw_regular_shapes(100, x)
 
 screen = Screen()
 screen.exitonclick()

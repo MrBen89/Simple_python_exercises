@@ -1,32 +1,41 @@
+import turtle
 import pandas
 
-# data = pandas.read_csv("weather_data.csv")
-# #
-# # data_dict = data.to_dict()
-# #
-# # temp_list = data["temp"].to_list()
-# # avg_temp = sum(temp_list)/len(temp_list)
-# # print(data["temp"].nlargest(1))
-#
-# print(data[data.day == "Monday"])
-# print(data[data.temp == data.temp.max()])
-#
-# monday = data[data.day == "Monday"]
-# mon_temp = monday.temp
-#
-# print(mon_temp*(9/5) + 32)
+data = pandas.read_csv("50_states.csv")
+states = data.state.tolist()
+guessed_states= []
 
-data = pandas.read_csv("Squirrel_Data.csv")
-grays = data[data["Primary Fur Color"] == "Gray"]
-blacks = data[data["Primary Fur Color"] == "Black"]
-reds = data[data["Primary Fur Color"] == "Cinnamon"]
+label = turtle.Turtle()
+label.speed("fastest")
+label.penup()
+label.hideturtle()
 
-print(len(grays), len(blacks), len(reds))
+def get_state_coord(state):
+    x = int(data[data.state == state].x)
+    y = int(data[data.state == state].y)
+    return (x, y)
 
-data_dict = {
-    "Fur Color": ["Gray", "Black", "Cinnamon"],
-    "Count": [len(grays), len(blacks), len(reds)]
-}
+screen = turtle.Screen()
+screen.title("U.S. States Game")
 
-census = pandas.DataFrame(data_dict)
-census.to_csv("census.csv")
+image = "blank_states_img.gif"
+screen.addshape(image)
+
+turtle.shape(image)
+
+def write_state(state, coord):
+    label.goto(coord)
+    label.write(f"{state}", False, "center", ("Arial", 10, "normal"))
+
+while len(guessed_states) < 50:
+    answer_state = screen.textinput(title=f"Guess the state. {len(guessed_states)}/50", prompt = "What's another state's name?")
+    for state in states:
+        if answer_state.lower() == state.lower():
+            guessed_states.append(answer_state)
+            states.remove(state)
+            print(guessed_states)
+            print(len(states))
+            write_state(state, get_state_coord(state))
+
+
+turtle.mainloop()

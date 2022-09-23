@@ -22,4 +22,4 @@ with open("./Input/Names/invited_names.txt") as namestxt:
         new_letter = letter.replace("[name]", stripped_name)
         print(new_letter)
         with open(f"./Output/ReadyToSend/{stripped_name}.txt", mode="w") as file:
-            file.write(new_letter)
+            file.write(f"\n{new_letter}")

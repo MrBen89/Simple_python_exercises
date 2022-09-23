@@ -8,6 +8,27 @@ window = Tk()
 window.title("Password Manager")
 window.config(padx=20, pady=30)
 
+#------------------------------Search websites --------------------------------#
+
+def website_search():
+    if len(website_input.get()) == 0:
+        messagebox.showinfo(title="Oh oh!", message="Looks like you forgot to enter a website.")
+    else:
+        try:
+            with open("passwords.json", mode="r") as file:
+                data = json.load(file)
+                saved_password = data[website_input.get()]["password"]
+
+        except FileNotFoundError:
+            messagebox.showinfo(title="Oh oh!", message="You don't currently have any websites saved.")
+        except KeyError:
+            messagebox.showinfo(title="Oh oh!", message="You haven't saved a password for that website.")
+        else:
+            messagebox.showinfo(title="Info!", message=f"Website: {website_input.get()}\nPassword: {saved_password}.")
+        finally:
+            website_input.delete(0, END)
+            password_input.delete(0, END)
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -74,9 +95,12 @@ canvas.grid(row=0, column=1)
 website_label = Label(text="Website: ")
 website_label.grid(row=1, column=0, sticky="ew")
 
-website_input = Entry(width=35)
-website_input.grid(row=1, column=1, columnspan=2, sticky="ew")
+website_input = Entry(width=21)
+website_input.grid(row=1, column=1, sticky="ew")
 website_input.focus()
+
+search_button = Button(text="Search", command=website_search)
+search_button.grid(row=1, column=2, sticky="ew")
 
 email_label = Label(text="Email: ")
 email_label.grid(row=2, column=0, sticky="ew")

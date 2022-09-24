@@ -153,3 +153,4 @@ cython_debug/
 snake_score.txt
 *.txt
 password/passwords.csv
+flashcard/data/to_learn.csv

@@ -13,8 +13,8 @@ import datetime as dt
 import random
 import pandas
 
-my_email = "b.pearson89@hotmail.com"
-my_password = "fishnegg1"
+my_email = "EMAIL"
+my_password = "PASSWORD"
 
 with open("./letter_templates/letter_1.txt") as letter_1_file:
     letter_1 = letter_1_file.read()
@@ -47,6 +47,6 @@ for contact in contacts:
              connection.login(user= my_email, password= my_password)
              connection.sendmail(
                  from_addr=my_email,
-                 to_addrs="benpearson61@googlemail.com",
+                 to_addrs="EMAIL",
                  msg=f"Subject:Happy Birthday!\n\n{personal_letter}"
              )

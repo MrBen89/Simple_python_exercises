@@ -2,8 +2,8 @@ import smtplib
 import datetime as dt
 import random
 
-my_email = "b.pearson89@hotmail.com"
-my_password = "fishnegg1"
+my_email = "EMAIL"
+my_password = "PASSWORD"
 
 with open("quotes.txt") as quote_file:
     all_quotes = quote_file.readlines()
@@ -17,6 +17,6 @@ if now.weekday() == 5:
          connection.login(user= my_email, password= my_password)
          connection.sendmail(
              from_addr=my_email,
-             to_addrs="benpearson61@googlemail.com",
+             to_addrs="EMAIL",
              msg=f"Subject:Today's quote\n\nThis is today's quote; \n\n{quote}"
          )

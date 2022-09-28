@@ -1,26 +1,21 @@
 from bs4 import BeautifulSoup
 import requests
 
-response = requests.get("https://news.ycombinator.com/news")
+response = requests.get("https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=%E9%AD%94%E7%95%8C%E6%9D%91&auccat=2084005536&va=%E9%AD%94%E7%95%8C%E6%9D%91&b=1&n=50")
 
-y_c_webpage = response.text
+webpage = response.text
 
-soup = BeautifulSoup(y_c_webpage, "html.parser")
-articles = soup.find_all(name="span", class_="titleline")
-article_texts = []
-article_links = []
+soup = BeautifulSoup(webpage, "html.parser")
+prices = soup.find_all(name="span", class_="Product__priceValue")
 
-for article_tag in articles:
-    text = article_tag.getText()
-    article_texts.append(text)
-    link = article_tag.a.get("href")
-    article_links.append(link)
+#for article_tag in articles:
+#    text = article_tag.getText()
+#    article_texts.append(text)
+#    link = article_tag.a.get("href")
+#    article_links.append(link)
 
-article_upvotes = [int(score.getText().split()[0]) for score in soup.find_all(name="span", class_="score")]
-
-
-
-
-index = article_upvotes.index(max(article_upvotes))
-
-print(article_texts[index], article_links[index], article_upvotes[index])
+price_list = []
+for price in prices:
+    cost = price.getText()
+    price_list.append(cost)
+print(price_list)

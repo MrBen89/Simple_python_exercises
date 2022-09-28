@@ -1,10 +1,13 @@
 import requests
 SHEETY_API = "https://api.sheety.co/e25c3800336773ce148c134eef069c3b/flightDeals/prices"
 TEQUILA_API = "https://api.tequila.kiwi.com/locations/query"
-TEQUILA_API_KEY = "secret"
+TEQUILA_API_KEY = "key"
 
 class DataManager:
     #This class is responsible for talking to the Google Sheet.
+    def __init__(self):
+        self.codes = []
+
     def populate_data(self):
         response = requests.get(url=SHEETY_API)
     #for num in range (0, len(response.json()["prices"])):
@@ -29,4 +32,5 @@ class DataManager:
             }
         }
         response = requests.put(url=f"{SHEETY_API}/{id}", json=body)
-        print(response.json())
+        self.codes.append(code)
+        print(self.codes)

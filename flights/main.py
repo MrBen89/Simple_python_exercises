@@ -12,3 +12,9 @@ if sheet_data["prices"][0]["iataCode"] == "":
     for num in range (0, len(sheet_data["prices"])):
         #iata_code = flight_search.get_iata((sheet_data["prices"][num]["city"]))
         data_manager.update_code(sheet_data["prices"][num]["id"], sheet_data["prices"][num]["city"])
+else:
+    data_manager.codes = ["PAR", "BER", "TYO", "SYD", "IST", "KUL", "NYC", "SYO", "CPT"]
+    print(data_manager.codes)
+
+for code in data_manager.codes:
+    flight_search.price_search(code)

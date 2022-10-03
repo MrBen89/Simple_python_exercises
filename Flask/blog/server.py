@@ -20,6 +20,15 @@ def about():
 def contact():
     return render_template("contact.html")
 
+@app.route("/form-entry", methods=["POST"])
+def receive_data():
+    data = request.form
+    print(data["name"])
+    print(data["email"])
+    print(data["phone"])
+    print(data["message"])
+    return "<h1>Successfully sent your message</h1>"
+
 @app.route("/blog/<id>")
 def get_blog(id):
     response = requests.get("https://api.npoint.io/c790b4d5cab58020d391")

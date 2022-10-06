@@ -6,7 +6,7 @@ from wtforms import StringField, IntegerField, SubmitField
 from wtforms.validators import DataRequired
 import requests
 
-API_KEY="API"
+API_KEY="e437c6a114f4d6b336fe1be5a7211c4c"
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -40,7 +40,10 @@ class AddForm(FlaskForm):
 
 @app.route("/")
 def home():
-    all_films = db.session.query(Film).all()
+    all_films = db.session.query(Film).order_by(Film.rating).all()
+    for i in range(len(all_films)):
+        all_films[i].ranking = len(all_films) - i
+    db.session.commit()
     return render_template("index.html", films=all_films)
 
 

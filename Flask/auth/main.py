@@ -30,25 +30,29 @@ def load_user(user_id):
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    return render_template("index.html", logged_in=current_user.is_authenticated)
 
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         pw = generate_password_hash(request.form["password"], method='pbkdf2:sha256', salt_length=8)
-        new_user = User(
-            email=request.form["email"],
-            password=pw,
-            name=request.form["name"],
-        )
-        db.session.add(new_user)
-        db.session.commit()
+        user = User.query.filter_by(email=request.form["email"]).first()
+        if user == None:
+            new_user = User(
+                email=request.form["email"],
+                password=pw,
+                name=request.form["name"],
+                )
+            db.session.add(new_user)
+            db.session.commit()
 
-        login_user(new_user)
+            login_user(new_user)
 
-        return redirect(url_for("secrets"))
-    return render_template("register.html")
+            return redirect(url_for("secrets"))
+        else:
+            flash('That email is already registered')
+    return render_template("register.html", logged_in=current_user.is_authenticated)
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -66,13 +70,13 @@ def login():
                 return redirect(url_for('secrets'))
             else:
                 flash('Password incorrect')
-    return render_template("login.html")
+    return render_template("login.html", logged_in=current_user.is_authenticated)
 
 
 @app.route('/secrets')
 @login_required
 def secrets():
-    return render_template("secrets.html", name=current_user.name)
+    return render_template("secrets.html", name=current_user.name, logged_in=current_user.is_authenticated)
 
 
 @app.route('/logout')
